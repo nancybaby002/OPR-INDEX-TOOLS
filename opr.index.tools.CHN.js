@@ -19,7 +19,12 @@
     const totalGet=createCount+rejectCount;
     var rate=((rejectCount+createCount)/totalCount*100).toFixed(2);
     $("#player_stats div").append('<br><p>'+
-        '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip="按你评审结果而驳回的Portal数量"></span>'+
+        '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip="通过比例"></span>'+
+        '<span style="margin-left: 5px" class="ingress-mid-blue pull-left">总通过数：</span>'+
+        '<span class="gold pull-right">'+totalGet+'</span>'+
+        '</p>');
+    $("#player_stats div").append('<br><p>'+
+        '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip="通过比例"></span>'+
         '<span style="margin-left: 5px" class="ingress-mid-blue pull-left">通过比例：</span>'+
         '<span class="gold pull-right">'+rate+'%（'+totalGet+'/'+totalCount+'）</span>'+
         '</p>');
