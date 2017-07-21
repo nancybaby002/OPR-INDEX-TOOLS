@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OPR-INDEX-TOOLS
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.1.1
 // @description  try to take over the world!
 // @author       nancybaby233
 // @match        https://opr.ingress.com/*
