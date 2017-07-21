@@ -1,0 +1,11 @@
+*.class
+.DS_Store
+.idea
+documentation/
+out/
+tmp/
+conf/application.conf.bak
+*.iml
+*.ipr
+*.iws
+*.md
