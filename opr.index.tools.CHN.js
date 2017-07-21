@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       nancybaby233
-// @match        https://opr.ingress.com/
+// @match        https://opr.ingress.com/*
 // @grant        none
 // @require      http://code.jquery.com/jquery-1.11.0.min.js
 // ==/UserScript==
