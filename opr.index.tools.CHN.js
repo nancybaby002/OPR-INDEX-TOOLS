@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OPR-INDEX-TOOLS
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1.20170722.1
+// @version      0.1.1.20170722.2
 // @description  try to take over the world!
 // @author       nancybaby233
 // @match        https://opr.ingress.com/*
@@ -46,29 +46,28 @@
         var target;
         if(totalPass<100){
             target=100;
-            barRate=totalPass/100*100;
+            barRate=(totalPass/100*100).toFixed(2);
             achieveName="铜";
         }else if(totalPass>=100&&totalPass<750){
             target=750;
-            barRate=totalPass/750*100;
+            barRate=(totalPass/750*100).toFixed(2);
             achieveName="银";
         }else if(totalPass>=750&&totalPass<2500){
             target=2500;
-            barRate=totalPass/2500*100;
+            barRate=(totalPass/2500*100).toFixed(2);
             achieveName="金";
         }else if(totalPass>=2500&&totalPass<5000){
             target=5000;
-            barRate=totalPass/5000*100;
+            barRate=(totalPass/5000*100).toFixed(2);
             achieveName="钛";
         }else if(totalPass>=5000&&totalPass<10000){
             target=10000;
-            barRate=totalPass/10000*100;
+            barRate=(totalPass/10000*100).toFixed(2);
             achieveName="黑";
         }else{
             target=10000;
             barRate=100;
             achieveName="黑";
-
         }
         var process='<br><p>'+
             '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip="按你评审结果而驳回的Portal数量"></span>'+
