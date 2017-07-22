@@ -31,7 +31,7 @@
         $("#player_stats div").append('<br><p>'+
             '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip="通过比例"></span>'+
             '<span style="margin-left: 5px" class="ingress-mid-blue pull-left">通过比例：</span>'+
-            '<span class="gold pull-right">'+passRatio+'%（'+totalPass+'/'+totalCount+'）</span>'+
+            '<span class="gold pull-right">'+passRatio+'%（'+totalPass+' / '+totalCount+'）</span>'+
             '</p>');
     }
     //Bronze: 100
@@ -73,7 +73,7 @@
         var process='<br><p>'+
             '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip="按你评审结果而驳回的Portal数量"></span>'+
             '<span style="margin-left: 5px" class="ingress-mid-blue pull-left">开'+achieveName+'牌进度：</span>'+
-            '<span class="gold pull-right">'+barRate+'%（'+totalPass+'/'+target+'）</span>'+
+            '<span class="gold pull-right">'+barRate+'%（'+totalPass+' / '+target+'）</span>'+
             '</p>';
         process=process+'<br><div class="progress progress-striped active"> <div class="progress-bar progress-bar-warning" role="progressbar"aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"style="width: '+barRate+'%;"> </div></div>';
         $("#player_stats div").append(process);
