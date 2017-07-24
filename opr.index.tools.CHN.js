@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OPR-INDEX-TOOLS
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1.20170722.2
+// @version      0.1.1.20170722.3
 // @description  try to take over the world!
 // @author       nancybaby233
 // @match        https://opr.ingress.com/*
@@ -40,30 +40,48 @@
     //Platinum: 5000
     //Onyx: 10000
     // 展示进度条
+
     function showProcessBar(){
         var barRate;
         var achieveName;
         var target;
-        if(totalPass<100){
-            target=100;
-            barRate=(totalPass/100*100).toFixed(2);
-            achieveName="铜";
-        }else if(totalPass>=100&&totalPass<750){
-            target=750;
-            barRate=(totalPass/750*100).toFixed(2);
-            achieveName="银";
-        }else if(totalPass>=750&&totalPass<2500){
-            target=2500;
-            barRate=(totalPass/2500*100).toFixed(2);
-            achieveName="金";
-        }else if(totalPass>=2500&&totalPass<5000){
-            target=5000;
-            barRate=(totalPass/5000*100).toFixed(2);
-            achieveName="钛";
-        }else if(totalPass>=5000&&totalPass<10000){
-            target=10000;
-            barRate=(totalPass/10000*100).toFixed(2);
-            achieveName="黑";
+        var achieveSet={
+            1:{
+                achieveName: "铜",
+                target:100
+            },
+            2:{
+                achieveName: "银",
+                target:750
+            },
+            3:{
+                achieveName: "金",
+                target:2500
+            },
+            4:{
+                achieveName: "钛",
+                target:5000
+            },
+            5:{
+                achieveName: "黑",
+                target:10000
+            },
+        };
+        function countResult(index){
+            target=achieveSet[index].target;
+            barRate=(totalPass/achieveSet[index].target*100).toFixed(2);
+            achieveName=achieveSet[index].achieveName;
+        }
+        if(totalPass<achieveSet[1].target){
+            countResult(1);
+        }else if(totalPass>=achieveSet[1].target&&totalPass<achieveSet[2].target){
+            countResult(2);
+        }else if(totalPass>=achieveSet[2].target&&totalPass<achieveSet[3].target){
+            countResult(3);
+        }else if(totalPass>=achieveSet[3].target&&totalPass<achieveSet[4].target){
+            countResult(4);
+        }else if(totalPass>=achieveSet[4].target&&totalPass<achieveSet[5].target){
+            countResult(5);
         }else{
             target=10000;
             barRate=100;
