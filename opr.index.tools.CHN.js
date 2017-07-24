@@ -9,7 +9,7 @@
 // @require      http://code.jquery.com/jquery-1.11.0.min.js
 // @homepageURL  https://github.com/nancybaby002/OPR-INDEX-TOOLS
 // @updateURL    https://raw.githubusercontent.com/nancybaby002/OPR-INDEX-TOOLS/master/opr.index.tools.CHN.user.js
-// @downloadURL  https://raw.githubusercontent.com/nancybaby002/OPR-INDEX-TOOLS/master/opr.index.tools.CHN.js
+// @downloadURL  https://raw.githubusercontent.com/nancybaby002/OPR-INDEX-TOOLS/master/opr.index.tools.CHN.user.js
 // ==/UserScript==
 (function() {
     'use strict';
