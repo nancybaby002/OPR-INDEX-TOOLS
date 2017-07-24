@@ -5,4 +5,4 @@
 需要使用tampermonkey
 
 ![示例图片](https://raw.githubusercontent.com/nancybaby002/OPR-INDEX-TOOLS/master/images/demo.png)
-
+点击[链接](https://raw.githubusercontent.com/nancybaby002/OPR-INDEX-TOOLS/master/opr.index.tools.CHN.js)安装此脚本。
