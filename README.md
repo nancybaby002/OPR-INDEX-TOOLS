@@ -6,7 +6,7 @@
 ![示例图片](https://raw.githubusercontent.com/nancybaby002/OPR-INDEX-TOOLS/master/images/demo.png)
 
 ## 安装方法
-点击[链接](https://raw.githubusercontent.com/nancybaby002/OPR-INDEX-TOOLS/master/opr.index.tools.CHN.js)安装此脚本。
+点击[链接](https://raw.githubusercontent.com/nancybaby002/OPR-INDEX-TOOLS/master/opr.index.tools.CHN.user.js)安装此脚本。
 
 ## 联系我
     如果遇到BUG，或者改进建议，欢迎tg私信我，@nancybaby233。
