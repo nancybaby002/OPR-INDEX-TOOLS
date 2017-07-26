@@ -156,9 +156,10 @@
     }
     function doCorrect(){
         correctNum=prompt("请输入偏移量。(总通过数-实际牌子显示数量)","0");
+        correctNum=correctNum?correctNum:"0";
         $(".correctNum").text(correctNum);
+        // 存差值到cookies
         Cookie.add_day("CORRECTNUM",correctNum,100);
-        console.log(Cookie.get("CORRECTNUM"));
         updateStats();
     }
     function updateStats(){
