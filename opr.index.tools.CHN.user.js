@@ -166,7 +166,7 @@
     }
 
     function doCorrect() {
-        correctNum = prompt("请输入偏移量。(总通过数-实际牌子显示数量)", "0");
+        correctNum = prompt("请输入偏移量。(总通过数-实际牌子显示数量)", correctNum);
         correctNum = correctNum ? correctNum : "0";
         correctNum = parseInt(correctNum);
         if (correctNum >= totalAllPass) {
