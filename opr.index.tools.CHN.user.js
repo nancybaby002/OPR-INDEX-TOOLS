@@ -14,7 +14,6 @@
 
 (function () {
     'use strict';
-    // 纠偏数量 默认为0
     var Cookie = new function () {
         // 以分钟为单位添加cookie
         this.add_minute = function (name, value, time) {
@@ -26,7 +25,7 @@
         };
         // 以小时为单位添加cookie
         this.add_hours = function (name, value, time) {
-            this.add_minute(name, value, time * 60)
+            this.add_minute(name, value, time * 60);
         };
         // 以天为单位添加cookie
         this.add_day = function (name, value, time) {
@@ -51,13 +50,16 @@
             document.cookie = cookieStr;
         };
     };
-
+    // 纠偏数量 默认为0
     var correctNum = Cookie.get("CORRECTNUM") ? Cookie.get("CORRECTNUM") : 0;
+    // 从页面获取的数据
     const totalCount = parseInt($(".gold")[0].innerText);
     const createCount = parseInt($(".gold")[1].innerText);
     const rejectCount = parseInt($(".gold")[2].innerText);
     const totalAllPass = rejectCount + createCount;
-    var passRatio = (totalAllPass / (totalCount - correctNum) * 100).toFixed(2);
+    // 通过比例
+    var passRatio = (totalAllPass / totalCount * 100).toFixed(2);
+    // 总有效数
     var totalPass = createCount + rejectCount - correctNum;
 
     // 实际通过数
@@ -65,7 +67,7 @@
         $("#player_stats div").append('<br><p>' +
             '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip="通过比例"></span>' +
             '<span style="margin-left: 5px" class="ingress-mid-blue pull-left">总通过数：</span>' +
-            '<span class="gold pull-right totalPass">' + totalAllPass + '</span>' +
+            '<span class="gold pull-right totalAllPass">' + totalAllPass + '</span>' +
             '</p>');
     }
 
@@ -156,7 +158,7 @@
     }
 
 
-    // 纠偏模块
+    // 展示纠偏模块
     function showCorrect() {
         $("#player_stats div").append('<br><p>' +
             '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip="偏移量"></span>' +
@@ -164,12 +166,12 @@
             '<span class="gold pull-right correctNum">' + correctNum + '</span>' +
             '</p>');
     }
-
     function doCorrect() {
-        correctNum = prompt("请输入偏移量。(总通过数-实际牌子显示数量)", correctNum);
-        correctNum = correctNum ? correctNum : "0";
+        // 输入差值
+        correctNum = prompt("请输入偏移量(总通过数-实际牌子显示数量)：", correctNum);
         correctNum = parseInt(correctNum);
-        if (correctNum >= totalAllPass) {
+        correctNum = correctNum ? correctNum : "0";
+        if (correctNum >= totalAllPass||correctNum<0) {
             alert("输入差值有误,请重新输入");
             return;
         }
@@ -183,7 +185,7 @@
         // 更新总通过数（纠偏）
         totalPass = createCount + rejectCount - correctNum;
         showProcessBar(1);
-        //$(".totalPass").text(totalPass);
+        $(".totalPass").text(totalPass);
         //更新通过比例（纠偏）
         //var passRatioString=passRatio + '%（' + totalPass + ' / ' + (totalCount-correctNum) +')';
         //$(".passRatio").text(passRatioString)
@@ -193,7 +195,7 @@
 
     $(function () {
         showTotalPass();
-        showPassRatio()
+        showPassRatio();
         showCurPass();
         showProcessBar();
         showCorrect();
