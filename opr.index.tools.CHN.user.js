@@ -15,9 +15,9 @@
 (function () {
     'use strict';
     // 纠偏数量 默认为0
-    var Cookie = new function() {
+    var Cookie = new function () {
         // 以分钟为单位添加cookie
-        this.add_minute = function(name, value, time) {
+        this.add_minute = function (name, value, time) {
             var life = new Date().getTime();
             life += time * 1000 * 60;
             var cookieStr = name + "=" + escape(value) + ";expires="
@@ -25,18 +25,18 @@
             document.cookie = cookieStr;
         };
         // 以小时为单位添加cookie
-        this.add_hours = function(name, value,  time) {
-            this.add_minute(name,value,time * 60)
+        this.add_hours = function (name, value, time) {
+            this.add_minute(name, value, time * 60)
         };
         // 以天为单位添加cookie
-        this.add_day = function(name, value,  time) {
-            this.add_hours(name,value,time * 24);
+        this.add_day = function (name, value, time) {
+            this.add_hours(name, value, time * 24);
         };
         // 获取cookie值
-        this.get = function(name) {
+        this.get = function (name) {
             var cookies = document.cookie.split("; ");
             if (cookies.length > 0) {
-                for(var s in cookies){
+                for (var s in cookies) {
                     var cookie = cookies[s].split("=");
                     if (cookie[0] == name)
                         return unescape(cookie[1]);
@@ -45,25 +45,35 @@
             return null;
         };
         // 删除cookie
-        this.remove = function(name) {
+        this.remove = function (name) {
             var cookieStr = name + "=" + escape('null') + ";expires="
                 + new Date().toGMTString();
             document.cookie = cookieStr;
         };
     };
 
-    var correctNum = Cookie.get("CORRECTNUM")?Cookie.get("CORRECTNUM"):0;
+    var correctNum = Cookie.get("CORRECTNUM") ? Cookie.get("CORRECTNUM") : 0;
     const totalCount = parseInt($(".gold")[0].innerText);
     const createCount = parseInt($(".gold")[1].innerText);
     const rejectCount = parseInt($(".gold")[2].innerText);
-    var passRatio = ((rejectCount + createCount) / (totalCount-correctNum) * 100).toFixed(2);
-    var totalPass = createCount + rejectCount-correctNum;
+    const totalAllPass = rejectCount + createCount;
+    var passRatio = (totalAllPass / (totalCount - correctNum) * 100).toFixed(2);
+    var totalPass = createCount + rejectCount - correctNum;
 
-    // 总通过数
+    // 实际通过数
     function showTotalPass() {
         $("#player_stats div").append('<br><p>' +
             '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip="通过比例"></span>' +
             '<span style="margin-left: 5px" class="ingress-mid-blue pull-left">总通过数：</span>' +
+            '<span class="gold pull-right totalPass">' + totalAllPass + '</span>' +
+            '</p>');
+    }
+
+    // 总有效数
+    function showCurPass() {
+        $("#player_stats div").append('<br><p>' +
+            '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip="通过比例"></span>' +
+            '<span style="margin-left: 5px" class="ingress-mid-blue pull-left">总有效数：</span>' +
             '<span class="gold pull-right totalPass">' + totalPass + '</span>' +
             '</p>');
     }
@@ -73,7 +83,7 @@
         $("#player_stats div").append('<br><p>' +
             '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip="通过比例"></span>' +
             '<span style="margin-left: 5px" class="ingress-mid-blue pull-left">通过比例：</span>' +
-            '<span class="gold pull-right passRatio">' + passRatio + '%（' + totalPass + ' / ' + (totalCount) + '）</span>' +
+            '<span class="gold pull-right passRatio">' + passRatio + '%（' + totalAllPass + ' / ' + (totalCount) + '）</span>' +
             '</p>');
     }
 
@@ -85,7 +95,7 @@
     // 展示进度条
     function showProcessBar(update) {
         // update作为更新的标识符
-        if(!update){
+        if (!update) {
             $("#player_stats div").append("<span class='process_container' style='display: block'></span>");
         }
         var barRate;
@@ -151,21 +161,27 @@
         $("#player_stats div").append('<br><p>' +
             '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip="偏移量"></span>' +
             '<span style="margin-left: 5px;cursor: pointer;" class="ingress-mid-blue pull-left" id="doCorrect">偏移量（点击输入）</span>' +
-            '<span class="gold pull-right correctNum">'+correctNum+'</span>'+
+            '<span class="gold pull-right correctNum">' + correctNum + '</span>' +
             '</p>');
     }
-    function doCorrect(){
-        correctNum=prompt("请输入偏移量。(总通过数-实际牌子显示数量)","0");
-        correctNum=correctNum?correctNum:"0";
-        correctNum=parseInt(correctNum);
+
+    function doCorrect() {
+        correctNum = prompt("请输入偏移量。(总通过数-实际牌子显示数量)", "0");
+        correctNum = correctNum ? correctNum : "0";
+        correctNum = parseInt(correctNum);
+        if (correctNum >= totalAllPass) {
+            alert("输入差值有误,请重新输入");
+            return;
+        }
         $(".correctNum").text(correctNum);
         // 存差值到cookies
-        Cookie.add_day("CORRECTNUM",correctNum,100);
+        Cookie.add_day("CORRECTNUM", correctNum, 100);
         updateStats();
     }
-    function updateStats(){
+
+    function updateStats() {
         // 更新总通过数（纠偏）
-        totalPass = createCount + rejectCount-correctNum;
+        totalPass = createCount + rejectCount - correctNum;
         showProcessBar(1);
         //$(".totalPass").text(totalPass);
         //更新通过比例（纠偏）
@@ -175,12 +191,13 @@
     }
 
 
-    $(function(){
+    $(function () {
         showTotalPass();
-        showPassRatio();
+        showPassRatio()
+        showCurPass();
         showProcessBar();
         showCorrect();
-        $(document).on('click', '#doCorrect', function() {
+        $(document).on('click', '#doCorrect', function () {
             doCorrect();
         });
     });
