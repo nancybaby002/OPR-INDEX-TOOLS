@@ -3,7 +3,7 @@
 ## 关于插件
     给OPR系统写的一个小插件。
     在原有基础上增加：总通过数，通过比例，有效数据，开牌进度。
-	本插件支持计数修正。由于猩猩开牌计数并不将特工poor期间的审po数据计入其中，因此请各位特工手动点击偏移量进行数据修正。
+	本插件支持计数修正。由于猩猩开牌计数并不将特工poor期间的审po数据计入其中(20170727猩猩已修复此bug)，因此请各位特工手动点击偏移量进行数据修正。
     需要使用tampermonkey
 ![示例图片](https://raw.githubusercontent.com/nancybaby002/OPR-INDEX-TOOLS/master/images/demo.png)
 
