@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OPR-INDEX-TOOLS
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1.20170726.1
+// @version      0.1.1.20170727.1
 // @description  try to take over the world!
 // @author       nancybaby233
 // @match        https://opr.ingress.com/*
@@ -161,7 +161,7 @@
     // 展示纠偏模块
     function showCorrect() {
         $("#player_stats div").append('<br><p>' +
-            '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip="偏移量"></span>' +
+            '<span class="glyphicon glyphicon-info-sign ingress-gray pull-left" uib-tooltip-trigger="outsideclick" uib-tooltip-placement="left" tooltip-class="goldBorder" uib-tooltip=""></span>' +
             '<span style="margin-left: 5px;cursor: pointer;" class="ingress-mid-blue pull-left" id="doCorrect">偏移量（点击输入）</span>' +
             '<span class="gold pull-right correctNum">' + correctNum + '</span>' +
             '</p>');
@@ -197,8 +197,8 @@
         showTotalPass();
         showPassRatio();
         showCurPass();
-        showProcessBar();
         showCorrect();
+        showProcessBar();
         $(document).on('click', '#doCorrect', function () {
             doCorrect();
         });
